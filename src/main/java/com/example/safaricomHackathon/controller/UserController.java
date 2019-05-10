@@ -1,6 +1,7 @@
 package com.example.safaricomHackathon.controller;
 
 import com.example.safaricomHackathon.config.TokenHandler;
+import com.example.safaricomHackathon.model.TokenModel;
 import com.example.safaricomHackathon.model.UserModel;
 import com.example.safaricomHackathon.repository.UserRepository;
 import com.google.gson.JsonObject;
@@ -19,9 +20,22 @@ public class UserController {
         long ttlMillis = 36000;
         TokenHandler mtoken = new TokenHandler();
         String mToken = mtoken.createJWT(userModel.getPassword(), userModel.getUsername(), "register", ttlMillis);
+        TokenModel model = new TokenModel(mToken);
+        model.setToken(mToken);
         JsonObject mObject = new JsonObject();
         mObject.addProperty("status", "200");
         mObject.addProperty("access_token", mToken);
         return String.valueOf(mObject);
     }
+
+    @PostMapping("login/user")
+    public String loginUser(UserModel userModel) {
+        userRepository.findById(userModel.getId());
+        JsonObject mObject = new JsonObject();
+        mObject.addProperty("status", "200");
+        mObject.addProperty("message", "Successful Authentication");
+        return String.valueOf(mObject);
+    }
+
+
 }
