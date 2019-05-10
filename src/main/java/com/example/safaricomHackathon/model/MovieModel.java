@@ -18,11 +18,4 @@ public class MovieModel {
     private String description;
     private String recommendation;
     private int rating;
-
-    public MovieModel(String title, String description, String recommendation, int rating) {
-        this.title = title;
-        this.description = description;
-        this.recommendation = recommendation;
-        this.rating = rating;
-    }
 }
