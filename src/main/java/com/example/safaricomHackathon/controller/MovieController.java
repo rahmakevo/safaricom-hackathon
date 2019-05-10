@@ -5,10 +5,10 @@ import com.example.safaricomHackathon.repository.MovieRepository;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MovieController {
@@ -26,7 +26,17 @@ public class MovieController {
     }
 
     @GetMapping("saved/reviews")
-    public @ResponseBody Iterable<MovieModel> getAllMovies() {
+    public Iterable<MovieModel> getAllMovies() {
         return movieRepository.findAll();
     }
+
+    @DeleteMapping("deleteAll")
+    public String deleteAll() {
+        movieRepository.deleteAll();
+        JsonObject mResponseObject = new JsonObject();
+        mResponseObject.addProperty("status", "200");
+        mResponseObject.addProperty("message", "Data has been deleted successfully");
+        return String.valueOf(mResponseObject);
+    }
+
 }

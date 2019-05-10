@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 public class UserController {
     @Autowired
@@ -33,11 +31,7 @@ public class UserController {
 
     @PostMapping("login/user")
     public String getAllUsers(@RequestBody String username, String password) {
-        List mUsers = (List) userRepository.findAll();
-        JsonObject mObject = new JsonObject();
-        mObject.addProperty("status", "200");
-        mObject.addProperty("access_token", String.valueOf(mUsers));
-        return String.valueOf(mObject);
+        return String.valueOf(userRepository.findByUsername(username));
     }
 
 
