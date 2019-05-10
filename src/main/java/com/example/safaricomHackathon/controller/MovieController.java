@@ -1,7 +1,9 @@
 package com.example.safaricomHackathon.controller;
 
 import com.example.safaricomHackathon.model.MovieModel;
+import com.example.safaricomHackathon.model.TokenModel;
 import com.example.safaricomHackathon.repository.MovieRepository;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +16,21 @@ public class MovieController {
     private MovieRepository movieRepository;
 
     @PostMapping("save/movies")
-    public String saveMovies(@RequestHeader() MovieModel movieModel) {
-        movieRepository.save(movieModel);
-        return "index";
+    public String saveMovies(@RequestHeader("access-token") MovieModel movieModel) {
+        String message;
+        JsonObject mResponseObject = new JsonObject();
+
+        TokenModel tokenModel = new TokenModel();
+        String mToken = tokenModel.getToken();
+        if (mToken.equals("access-token")) {
+            movieRepository.save(movieModel);
+            message = "Your review was added successfully";
+        } else {
+            message = "You don't have access to this service";
+        }
+
+        mResponseObject.addProperty("status", "200");
+        mResponseObject.addProperty("message", message);
+        return String.valueOf(mResponseObject);
     }
 }
