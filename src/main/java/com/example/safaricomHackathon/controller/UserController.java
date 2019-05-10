@@ -7,11 +7,7 @@ import com.example.safaricomHackathon.repository.UserRepository;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Arrays;
-import java.util.List;
 
 @RestController
 public class UserController {
@@ -29,15 +25,6 @@ public class UserController {
         JsonObject mObject = new JsonObject();
         mObject.addProperty("status", "200");
         mObject.addProperty("access_token", mToken);
-        return String.valueOf(mObject);
-    }
-
-    @PostMapping("login/user")
-    public String getAllUsers(@RequestBody String username, String password) {
-        userRepository.findByUserName(username);
-        JsonObject mObject = new JsonObject();
-        mObject.addProperty("status", "200");
-        mObject.addProperty("access_token", String.valueOf(userRepository.findByUserName(username)));
         return String.valueOf(mObject);
     }
 
