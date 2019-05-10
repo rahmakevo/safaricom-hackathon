@@ -3,6 +3,7 @@ package com.example.safaricomHackathon.controller;
 import com.example.safaricomHackathon.config.TokenHandler;
 import com.example.safaricomHackathon.model.TokenModel;
 import com.example.safaricomHackathon.model.UserModel;
+import com.example.safaricomHackathon.repository.TokenRepository;
 import com.example.safaricomHackathon.repository.UserRepository;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserRepository userRepository;
+    TokenRepository tokenRepository;
 
     @PostMapping("register/user")
     public String registerUser(UserModel userModel) {
@@ -25,6 +27,7 @@ public class UserController {
         String mToken = mtoken.createJWT(userModel.getPassword(), userModel.getUsername(), "register", ttlMillis);
         TokenModel model = new TokenModel(mToken);
         model.setToken(mToken);
+        tokenRepository.save(new TokenModel(mToken));
         JsonObject mObject = new JsonObject();
         mObject.addProperty("status", "200");
         mObject.addProperty("access_token", mToken);

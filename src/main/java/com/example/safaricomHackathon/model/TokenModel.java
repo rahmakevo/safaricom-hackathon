@@ -1,5 +1,11 @@
 package com.example.safaricomHackathon.model;
 
+import lombok.Data;
+
+import javax.persistence.Entity;
+
+@Entity
+@Data
 public class TokenModel {
 
     private String token;
