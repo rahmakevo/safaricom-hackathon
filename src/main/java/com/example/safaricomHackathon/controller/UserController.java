@@ -34,10 +34,10 @@ public class UserController {
 
     @PostMapping("login/user")
     public String getAllUsers(@RequestBody String username, String password) {
-        List<Iterable> mList = Arrays.asList(userRepository.findAll());
+        userRepository.findByUserName(username);
         JsonObject mObject = new JsonObject();
         mObject.addProperty("status", "200");
-        mObject.addProperty("access_token", String.valueOf(mList));
+        mObject.addProperty("access_token", String.valueOf(userRepository.findByUserName(username)));
         return String.valueOf(mObject);
     }
 
