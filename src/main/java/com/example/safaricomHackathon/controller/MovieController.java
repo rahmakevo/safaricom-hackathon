@@ -21,7 +21,7 @@ public class MovieController {
         JsonObject mResponseObject = new JsonObject();
 
         TokenModel tokenModel = null;
-        if (tokenModel.getToken().equals("access-token")) {
+        if (tokenModel.getToken().equals("eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJrc2l1bmR1IiwiaWF0IjoxNTU3NDgzMjAxLCJzdWIiOiJyZWdpc3RlciIsImlzcyI6ImtzaXVuZHUiLCJleHAiOjE1NTc0ODMyMzd9.TLns--tDXx0zcdpfxrVW_4nqx0j4AOiPBlzXKM7YTFU")) {
             movieRepository.save(movieModel);
             message = "Your review was added successfully";
         } else {
