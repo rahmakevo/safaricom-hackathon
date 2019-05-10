@@ -18,4 +18,5 @@ public class MovieModel {
     private String description;
     private String recommendation;
     private int rating;
+    private boolean watched;
 }
