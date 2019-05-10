@@ -20,7 +20,7 @@ public class MovieController {
         String message;
         JsonObject mResponseObject = new JsonObject();
 
-        TokenModel tokenModel = new TokenModel();
+        TokenModel tokenModel = null;
         String mToken = tokenModel.getToken();
         if (mToken.equals("access-token")) {
             movieRepository.save(movieModel);
