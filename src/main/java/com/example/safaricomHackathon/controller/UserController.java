@@ -7,7 +7,11 @@ import com.example.safaricomHackathon.repository.UserRepository;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Arrays;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -29,11 +33,11 @@ public class UserController {
     }
 
     @PostMapping("login/user")
-    public String loginUser(UserModel userModel) {
-        userRepository.findByUsername(userModel.getUsername());
+    public String getAllUsers(@RequestBody String username, String password) {
+        List<Iterable<UserModel>> mList = Arrays.asList(userRepository.findAll());
         JsonObject mObject = new JsonObject();
         mObject.addProperty("status", "200");
-        mObject.addProperty("message", "Successful Authentication");
+        mObject.addProperty("access_token", String.valueOf(mList));
         return String.valueOf(mObject);
     }
 
