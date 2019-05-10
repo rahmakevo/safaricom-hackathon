@@ -19,7 +19,7 @@ public class MovieController {
     private MovieRepository movieRepository;
 
     @PostMapping("save/movies")
-    public String saveMovies(@RequestHeader("access-token") MovieModel movieModel) {
+    public String saveMovies(MovieModel movieModel) {
         JsonObject mResponseObject = new JsonObject();
         movieRepository.save(movieModel);
         mResponseObject.addProperty("status", "200");
