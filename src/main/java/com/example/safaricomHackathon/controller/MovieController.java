@@ -17,7 +17,7 @@ public class MovieController {
     @PostMapping("save/movies")
     public String saveMovies(@RequestBody String access_token, MovieModel movieModel) {
         JsonObject mResponseObject = new JsonObject();
-        if (new TokenModel(access_token).getToken().equals(access_token)) {
+        if (new TokenModel().getToken().equals(access_token)) {
             movieRepository.save(movieModel);
             mResponseObject.addProperty("status", "200");
             mResponseObject.addProperty("message", "Data has been saved successfully");

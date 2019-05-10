@@ -22,7 +22,7 @@ public class UserController {
         long ttlMillis = 36000;
         TokenHandler mtoken = new TokenHandler();
         String mToken = mtoken.createJWT(userModel.getPassword(), userModel.getUsername(), "register", ttlMillis);
-        TokenModel model = new TokenModel(mToken);
+        TokenModel model = new TokenModel();
         model.setToken(mToken);
         JsonObject mObject = new JsonObject();
         mObject.addProperty("status", "200");
