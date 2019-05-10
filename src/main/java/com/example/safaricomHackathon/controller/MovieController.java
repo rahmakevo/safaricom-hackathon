@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MovieController {
 
     @Autowired
-    MovieRepository movieRepository;
+    private MovieRepository movieRepository;
 
     @PostMapping("save/movies")
     public String saveMovies(MovieModel movieModel) {
