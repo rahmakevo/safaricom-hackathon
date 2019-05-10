@@ -30,7 +30,7 @@ public class UserController {
 
     @PostMapping("login/user")
     public String loginUser(UserModel userModel) {
-        userRepository.findById(userModel.getId());
+        userRepository.findByUsername(userModel.getUsername());
         JsonObject mObject = new JsonObject();
         mObject.addProperty("status", "200");
         mObject.addProperty("message", "Successful Authentication");
