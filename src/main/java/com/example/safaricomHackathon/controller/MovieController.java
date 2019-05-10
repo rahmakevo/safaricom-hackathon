@@ -5,6 +5,7 @@ import com.example.safaricomHackathon.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 @Controller
 public class MovieController {
@@ -13,7 +14,7 @@ public class MovieController {
     private MovieRepository movieRepository;
 
     @PostMapping("save/movies")
-    public String saveMovies(MovieModel movieModel) {
+    public String saveMovies(@RequestHeader() MovieModel movieModel) {
         movieRepository.save(movieModel);
         return "index";
     }
