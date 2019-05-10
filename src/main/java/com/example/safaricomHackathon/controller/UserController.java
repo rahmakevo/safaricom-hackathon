@@ -34,7 +34,7 @@ public class UserController {
 
     @PostMapping("login/user")
     public String getAllUsers(@RequestBody String username, String password) {
-        List<Iterable<UserModel>> mList = Arrays.asList(userRepository.findAll());
+        List<Iterable> mList = Arrays.asList(userRepository.findAll());
         JsonObject mObject = new JsonObject();
         mObject.addProperty("status", "200");
         mObject.addProperty("access_token", String.valueOf(mList));
