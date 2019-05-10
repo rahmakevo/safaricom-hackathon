@@ -6,6 +6,7 @@ import com.example.safaricomHackathon.model.UserModel;
 import com.example.safaricomHackathon.repository.UserRepository;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Autowired
     UserRepository userRepository;
+
+    @GetMapping("/")
+    public String defaultController() {
+        JsonObject mResponseObject = new JsonObject();
+        mResponseObject.addProperty("status", "200");
+        mResponseObject.addProperty("message", "Welcome to Safaricom Hackathon API");
+        return String.valueOf(mResponseObject);
+    }
 
     @PostMapping("register/user")
     public String registerUser(UserModel userModel) {

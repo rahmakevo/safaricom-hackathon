@@ -13,6 +13,14 @@ public class MovieController {
     @Autowired
     private MovieRepository movieRepository;
 
+    @GetMapping("/")
+    public String defaultController() {
+        JsonObject mResponseObject = new JsonObject();
+        mResponseObject.addProperty("status", "200");
+        mResponseObject.addProperty("message", "Welcome to Safaricom Hackathon API");
+        return String.valueOf(mResponseObject);
+    }
+
     @PostMapping("save/movies")
     public String saveMovies(MovieModel movieModel) {
         JsonObject mResponseObject = new JsonObject();
