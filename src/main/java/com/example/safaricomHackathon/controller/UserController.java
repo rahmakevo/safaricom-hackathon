@@ -16,14 +16,6 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/")
-    public String defaultController() {
-        JsonObject mResponseObject = new JsonObject();
-        mResponseObject.addProperty("status", "200");
-        mResponseObject.addProperty("message", "Welcome to Safaricom Hackathon API");
-        return String.valueOf(mResponseObject);
-    }
-
     @PostMapping("register/user")
     public String registerUser(UserModel userModel) {
         userRepository.save(userModel);
