@@ -37,11 +37,19 @@ public class MovieController {
     }
 
     @DeleteMapping("deleteAll")
-    public String deleteAll() {
-        movieRepository.deleteAll();
+    public String deleteAll(@RequestBody String accessToken) {
         JsonObject mResponseObject = new JsonObject();
-        mResponseObject.addProperty("status", "200");
-        mResponseObject.addProperty("message", "Data has been deleted successfully");
+        Constants mConstant = new Constants();
+        String token = mConstant.token;
+
+        if (token.equals(accessToken)) {
+            movieRepository.deleteAll();
+            mResponseObject.addProperty("status", "200");
+            mResponseObject.addProperty("message", "Data has been deleted successfully");
+        } else {
+            mResponseObject.addProperty("status", "200");
+            mResponseObject.addProperty("message", "You do not have access to this service");
+        }
         return String.valueOf(mResponseObject);
     }
 
